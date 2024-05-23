@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+    <div class="container">
+        <div class="row mt-4">
+            <h3>Marcar Data:</h3>
+        </div>
+        <form action="" method="POST" class="row mt-4 p-4 round border shadow">
+           {{ form.hidden_tag() }}
+
+
+           <div class="form-group col-12">
+               {{ form.data_marc.label() }}
+               {{ form.data_marc(class="form-control", required="") }}
+               {% if form.data_marc.errors %}
+                   <div class="alert alert-danger">
+                       {% for error in form.data_marc.errors %}
+                           <span>{{ error }}</span>
+                       {% endfor %}
+                   </div>
+               {% endif %}
+           </div>
+
+           <div class="form-group col-12">
+               {{ form.btnSubmit(class="btn btn-primary col-12 mt-3") }}
+           </div>
+
+        </form>
+    </div>
+{% endblock %}

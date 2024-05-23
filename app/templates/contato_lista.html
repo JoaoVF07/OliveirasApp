@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row mt-4 justify-content-center">
+        <div class="col-md-8">
+            {% include 'nave.html' %}
+        </div>
+    </div>
+
+    <div class="row mt-4 justify-content-center">
+        <div class="col-md-8" style="background-color: #f0f5ff; border-radius: 10px; padding: 20px;">
+            <h3 class="mb-4">Datas Reservadas</h3>
+
+            <form method="get" class="row">
+                <div class="col-9">
+                    <input type="text" name="pesquisa" class="form-control">
+                </div>
+                <div class="col-3">
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                </div>
+            </form>
+
+            <div class="col-12 mt-3">
+                <table class="table table-striped">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Usuário</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Feito</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for linha in contato %}
+                        <tr>
+                            <td>{{ linha.user.nome }}</td>
+                            <td>{{ linha.data_marc.strftime('%d/%m/%Y') }}</td>
+                            <td>
+                                <form method="post" style="display:inline;">
+                                    <input type="hidden" name="contato_id" value="{{ linha.id }}">
+                                    <input type="checkbox" name="feito" onclick="this.form.submit()" {% if linha.feito %}checked{% endif %}>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
